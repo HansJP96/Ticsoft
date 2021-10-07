@@ -1,0 +1,20 @@
+CREATE TABLE IF NOT EXISTS Estado_ventas (
+    `ID_VENTA` INT,
+    `DESCRIPCI_N_VENTA` VARCHAR(23) CHARACTER SET utf8,
+    `FECHA_VENTA` DATETIME,
+    `CANTIDAD` INT,
+    `VALOR_TOTAL` INT,
+    `ID_USUARIO` VARCHAR(7) CHARACTER SET utf8,
+    `ESTADO_VENTA` VARCHAR(9) CHARACTER SET utf8
+);
+INSERT INTO Estado_ventas VALUES
+    (1,'XIAOMI REDMI NOTE 9 LTE','2021-02-23 00:00:00',2,1465812,'USER001','Creación'),
+    (2,'Xiaomi POCO X3 Pro','2021-12-05 00:00:00',1,845564,'USER002','Embalaje'),
+    (3,'OnePlus Nord 2','2021-04-06 00:00:00',3,2783142,'USER003','Despacho'),
+    (4,'Xiaomi POCO F3','2021-03-26 00:00:00',4,3368032,'USER004','Ruta'),
+    (5,'OnePlus Nord CE','2021-08-12 00:00:00',2,1637342,'USER005','Ubicación'),
+    (6,'OPPO A73 5G','2021-08-09 00:00:00',1,736172,'USER005','Recepción'),
+    (7,'Samsung Galaxy A52','2021-04-18 00:00:00',2,1409986,'USER004','Recepción'),
+    (8,'Realme 8 Pro','2021-11-29 00:00:00',1,928228,'USER003','Ubicación'),
+    (9,'Realme 7','2021-03-10 00:00:00',4,2848396,'USER002','Despacho'),
+    (10,'TCL 10L','2021-06-07 00:00:00',3,1358982,'USER001','Embalaje');
