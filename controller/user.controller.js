@@ -1,8 +1,8 @@
 const db = require("../models")
-const User = db.ticsoft
+const Usuarios = db.usuarios
 const Op = db.Sequelize.Op
 
-exports.create = (req, res) => {
+exports.createNewUser = (req, res) => {
     // Validate request
     if (!req.body.email) {
         res.status(400).send({
@@ -19,7 +19,7 @@ exports.create = (req, res) => {
         ImageUrl: req.body.imageUrl
     }
 
-    User.create(user)
+    Usuarios.create(user)
         .then(data => {
             res.send(data);
         })
@@ -30,10 +30,10 @@ exports.create = (req, res) => {
         })
 }
 
-exports.findOne = (req, res) => {
+exports.findOneUser = (req, res) => {
     const email = req.params.Email
 
-    User.findOne({ where: { Email: email } })
+    Usuarios.findOne({ where: { Email: email } })
         .then(data => {
             if (data) {
                 res.send(data)
@@ -51,9 +51,9 @@ exports.findOne = (req, res) => {
 
 }
 
-exports.findAll = (req, res) => {
+exports.findAllUsers = (req, res) => {
 
-    User.findAll()
+    Usuarios.findAll()
         .then(data => {
             res.send(data)
         })
@@ -64,10 +64,10 @@ exports.findAll = (req, res) => {
         })
 }
 
-exports.update = (req, res) => {
+exports.updateUser = (req, res) => {
     const email = req.params.Email
 
-    User.update(req.body, {
+    Usuarios.update(req.body, {
             where: { Email: email }
         })
         .then(change => {

@@ -1,12 +1,12 @@
 module.exports = app => {
-    const user = require("../controller/user.controller")
+    const tecsoft = require("../controller/user.controller")
     var router = require("express").Router()
 
-    router.get("/:Email", user.findOne)
-    router.get("/", user.findAll)
-    router.post("/", user.create)
-    router.post("/:Email", user.update)
+    router.get("/users/:Email", tecsoft.findOneUser)
+    router.get("/users", tecsoft.findAllUsers)
+    router.post("/users", tecsoft.createNewUser)
+    router.post("/users/:Email", tecsoft.updateUser)
 
-    app.use("/api/users", router)
+    app.use("/api", router)
 
 }

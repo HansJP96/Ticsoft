@@ -19,6 +19,6 @@ const db = {}
 db.Sequelize = Sequelize
 db.sequelize = sequelize
 
-db.ticsoft = require("./user.model")(sequelize, Sequelize)
+db.usuarios = require("./user.model")(sequelize, Sequelize)
 
 module.exports = db
