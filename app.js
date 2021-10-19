@@ -38,7 +38,7 @@ productosModel.findAll({attributes:['NombreProducto','ValorUnitarioProducto']})
     })
 
 
-app.listen(3000, ()=>{
-    console.log('SERVER UP en http:localhost:3000')
+app.listen(4000, ()=>{
+    console.log('SERVER UP en http:localhost:4000')
 
 })
