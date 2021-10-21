@@ -1,8 +1,8 @@
 module.exports = {
-    HOST: "localhost",
-    USER: "root",
-    PASSWORD: "",
-    DB: "pruebaherokubase",
+    HOST: "ec2-3-221-100-217.compute-1.amazonaws.com",
+    USER: "kjpajkxvrdplst",
+    PASSWORD: "db3e79ea4eb4751119f9c73e0a6c7e07a5477617235e31ee29404f23d51c7ab8",
+    DB: "den5nqv64od88d",
     dialect: "mysql",
     timezone: "-05:00",
     pool: {
