@@ -23,7 +23,7 @@ import ActualizarUsuario from './components/MasterAdmin';
 class App extends Component {
   render() {
     return (
-      <MasterAdmin />
+      <Ventas />
     )
   }
 }
