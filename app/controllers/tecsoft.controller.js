@@ -86,7 +86,7 @@ exports.crearVenta = (req, res) => {
         cantidad: req.body.cantidad,
         estadoVenta: req.body.estadoVenta ? req.body.estadoVenta : "En proceso",
         productosId: req.body.productosId,
-        usuarioId: req.body.usuarioId
+        usuarioId: req.body.usuarioId,
     };
 
     Ventas.create(venta)
@@ -259,25 +259,25 @@ exports.findAllUsers = (req, res) => {
 }
 
 exports.updateUser = (req, res) => {
-    const email = req.params.Email
+    const id = req.params.id
 
     Usuarios.update(req.body, {
-            where: { Email: email }
+            where: { Id: id }
         })
         .then(change => {
             if (change == 1) {
                 res.send({
-                    message: `The user with email=${email} was updated successfully`
+                    message: `The user with id=${id} was updated successfully`
                 })
             } else {
                 res.send({
-                    messsage: `Cannot uptdate the user with email=${email}.Maybe the email was not found or req.body is empty`
+                    messsage: `Cannot uptdate the user with id=${id}.Maybe the email was not found or req.body is empty`
                 })
             }
         })
         .catch(err => {
             res.status(500).send({
-                message: "Error updating email with email=" + email
+                message: "Error updating email with id=" + id
             })
         })
 }

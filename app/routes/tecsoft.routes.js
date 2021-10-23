@@ -19,13 +19,13 @@ module.exports = app => {
 
     router.put("/actualizarProducto/:id", tecsoft.actualizarProducto);
 
-    router.put("/actualizarVentas/:id", tecsoft.actualizarVenta);
+    router.post("/actualizarVentas/:id", tecsoft.actualizarVenta);
 
     //Rutas Usuario
     router.get("/users/:Email", tecsoft.findOneUser)
     router.get("/users", tecsoft.findAllUsers)
     router.post("/users", tecsoft.createNewUser)
-    router.post("/users/:Email", tecsoft.updateUser)
+    router.post("/users/:id", tecsoft.updateUser)
 
     app.use('/api/', router);
 };
