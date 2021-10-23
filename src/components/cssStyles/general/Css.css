@@ -1,0 +1,22 @@
+.row {
+    padding-top: 3%;
+    text-align: center;
+}
+
+.tabless {
+    padding-top: 3%;
+}
+
+.toastSucess{
+    justify-content: center;
+    display: flex;
+    padding-top: 3%;
+}
+
+.form{
+    padding-top: 3%;
+}
+
+.listItems{
+    justify-content: center;
+}
