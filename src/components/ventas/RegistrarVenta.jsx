@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import TecsoftDataService from "../services/tecsoft.service";
+import TecsoftDataService from "../../services/tecsoft.service";
 
 import '../cssStyles/general/Css.css'
 
@@ -9,6 +9,7 @@ import Toast from 'react-bootstrap/Toast';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/esm/Container';
+import DropdownItem from '@restart/ui/esm/DropdownItem';
 
 export default class RegistrarVenta extends Component {
 
@@ -34,11 +35,12 @@ export default class RegistrarVenta extends Component {
             cantidad: "",
             estadoVenta: "En proceso",
             productosId: "",
-            usuarioId: "",
-
+            usuarioId: 0,
             submitted: false
         };
     }
+
+
 
     onChangeIdCliente(e) {
         this.setState({
@@ -59,15 +61,21 @@ export default class RegistrarVenta extends Component {
     }
 
     onChangeProductosId(e) {
+        var change = JSON.parse(e.target.value)
         this.setState({
-            productosId: e.target.value
+            productosId: change.producto.id
         });
+        this.setActiveProductos(change.producto, change.index)
     }
 
     onChangeUsuariosId(e) {
+        var change2 = JSON.parse(e.target.value)
+        console.log(change2.usuario.Id)
         this.setState({
-            usuarioId: e.target.value
+            usuarioId: change2.usuario.Id
         });
+        this.setActiveUsuarios(change2.usuario, change2.posicion)
+        console.log(this.state)
     }
 
     componentDidMount() {
@@ -90,6 +98,8 @@ export default class RegistrarVenta extends Component {
     }
 
     setActiveProductos(producto, index) {
+
+        console.log(index)
         this.setState({
             currentProducto: producto,
             currentIndex: index
@@ -126,8 +136,8 @@ export default class RegistrarVenta extends Component {
             usuarioId: this.state.usuarioId,
 
 
-        }; console.log(this.state.usuarioId);
-
+        }; 
+        console.log(this.state.usuarioId)
         TecsoftDataService.crear(data)
             .then(response => {
                 this.setState({
@@ -155,7 +165,7 @@ export default class RegistrarVenta extends Component {
             cantidad: "",
             estadoVenta: "",
             productosId: "",
-            usuarioId: "",
+            usuarioId: 0,
 
             submitted: false
         });
@@ -165,93 +175,6 @@ export default class RegistrarVenta extends Component {
 
         const { productos, currentProducto, currentIndex, usuarios, currentUsuario, currentPosicion } = this.state;
 
-<<<<<<< HEAD:productos/proyecto_test/src/components/ventas/RegistrarVenta.jsx
-function RegistrarVenta() {
-
-    const [show, setShow] = useState(false);
-
-    return (
-
-        <Container className="test">
-
-            <Form>
-                    <Row>
-                        <Col>
-                        <Form.Label>Id Producto</Form.Label>
-                        <Form.Select size="m">
-                            <option>11122</option>
-                            <option>22233</option>
-                            <option>33344</option>
-                        </Form.Select>
-                        </Col>
-                        <Col>
-                            <Form.Group className="mb-3" controlId="formGroupValor">
-                                <Form.Label>Valor Unitario</Form.Label>
-                                <Form.Control type="text" placeholder="Valor Unitario" disabled/>
-                            </Form.Group>
-                        </Col>
-                        <Col>
-                            <Form.Group className="mb-3" controlId="formGroupNombre">
-                                <Form.Label>Nombre Producto</Form.Label>
-                                <Form.Control type="text" placeholder="Nombre" disabled />
-                            </Form.Group>
-                        </Col>
-                    </Row>
-                
-                <Form.Group className="mb-3" controlId="formGroupDescripcion">
-                    <Form.Label>Descripcion Producto</Form.Label>
-                    <Form.Control placeholder="Descripcion" disabled />
-                </Form.Group>
-
-                <Form.Group>
-                <Form.Label>Cantidad</Form.Label>
-                        <Form.Select size="m">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                        </Form.Select>
-                </Form.Group>
-
-                <Form.Group className="mb-3" controlId="formGroupIdCliente">
-                    <Form.Label>Id Cliente</Form.Label>
-                    <Form.Control placeholder="Id CLiente" />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formGroupNombreCliente">
-                    <Form.Label>Nombre Cliente</Form.Label>
-                    <Form.Control placeholder="Nombre Cliente" />
-                </Form.Group>
-                <Form.Group>
-                <Form.Label>Id Vendedor</Form.Label>
-                        <Form.Select size="m">
-                            <option>11122</option>
-                            <option>22233</option>
-                            <option>33344</option>
-                        </Form.Select>
-                </Form.Group>
-                <Form.Group>
-                <div className="d-grid gap-2">
-                <Button variant="outline-dark" size="lg" onClick={() => setShow(true)}>
-                    Registrar Venta
-                </Button>
-                </div>
-                </Form.Group>
-            </Form>
-
-                <Col xs={4} className="toastTst">
-                    <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide>
-                        <Toast.Header>
-                            <strong className="me-auto">Correcto</strong>
-                            <small>Ahora</small>
-                        </Toast.Header>
-                        <Toast.Body>Venta registrada con exito</Toast.Body>
-                    </Toast>
-                </Col>
-        </Container>
-    )
-}
-
-export default RegistrarVenta
-=======
         return (
             <div className="form">
                 {this.state.submitted ? (
@@ -270,13 +193,16 @@ export default RegistrarVenta
                             <Row>
                                 <Col>
                                     <Form.Label >Id Producto</Form.Label>
-                                    <Form.Select value={this.state.productosId} onChange={this.onChangeProductosId}>
-                                        {productos && productos.map((producto, index) => (
-                                            <option size="m" className={"list-group " + (index === currentIndex ? "active" : "")}
-                                                onClick={() => this.setActiveProductos(producto, index)}
-                                                key={index}
-                                                value={producto.id}>{producto.id}</option>
-                                        ))}
+                                    <Form.Select onChange={this.onChangeProductosId} >
+                                        {productos && productos.map((producto, index) => {
+                                            return (
+                                                <option size="m" className={"list-group " + (index === currentIndex ? "active" : "")}
+                                                    key={index}
+                                                    value={JSON.stringify({ producto, index })}>
+                                                    {producto.id}
+                                                </option>
+                                            )
+                                        })}
                                     </Form.Select>
                                 </Col>
                                 <Col>
@@ -331,25 +257,26 @@ export default RegistrarVenta
                                 <Row>
                                     <Col>
                                         <Form.Label >Id Vendedor</Form.Label>
-                                        <Form.Select value={this.state.usuarioId} onChange={this.onChangeUsuariosId}>
-                                            {usuarios && usuarios.map((usuario, posicion) => (
-                                                <option size="m" className={"list-group " + (posicion === currentPosicion ? "active" : "")}
-                                                    onClick={() => this.setActiveUsuarios(usuario, posicion)}
-                                                    key={posicion}
-                                                    value={usuario.id}>{usuario.id}</option>
-                                            ))}
+                                        <Form.Select onChange={this.onChangeUsuariosId}>
+                                            {usuarios && usuarios.map((usuario, posicion) => {
+                                                return (
+                                                    <option size="m" className={"list-group " + (posicion === currentPosicion ? "active" : "")}
+                                                        value={JSON.stringify({ usuario, posicion })}
+                                                        key={posicion}>{usuario.Id}</option>
+                                                )
+                                            })}
                                         </Form.Select>
                                     </Col>
-                                        {currentUsuario ? (
-                                            <Col>
-                                                <Form.Group className="mb-3" controlId="formGroupNombre">
-                                                    <Form.Label>Nombre Vendedor</Form.Label>
-                                                    <Form.Control type="text"
-                                                        placeholder={currentUsuario.FirstName} disabled />
-                                                </Form.Group>
-                                            </Col>) : (
-                                            <label></label>
-                                        )}
+                                    {currentUsuario ? (
+                                        <Col>
+                                            <Form.Group className="mb-3" controlId="formGroupNombre">
+                                                <Form.Label>Nombre Vendedor</Form.Label>
+                                                <Form.Control type="text"
+                                                    placeholder={currentUsuario.FirstName} disabled />
+                                            </Form.Group>
+                                        </Col>) : (
+                                        <label></label>
+                                    )}
                                 </Row>
                                 <Row>
                                     <Col>
@@ -378,4 +305,3 @@ export default RegistrarVenta
         );
     }
 }
->>>>>>> 1e0cf0345782d1c90f7215d617b1a6618fbd5c99:productos/proyecto_test/src/components/RegistrarVenta.jsx

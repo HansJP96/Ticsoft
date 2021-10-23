@@ -32,20 +32,25 @@ class TecsoftDataService {
   }
 
   actualizar(id, data) {
-    return http.put(`/actualizarVentas/${id}`, data);
+    return http.post(`/actualizarVentas/${id}`, data);
   }
 
   //servicios usuarios
 
-  obtenerUsuarios() {
+  /*obtenerUsuarios() {
     return http.get("/obtenerUsuarios");
   }
 
   actualizarUsuarios(id, data) {
     return http.put(`/actualizarUsuarios/${id}`, data);
+  }*/
+  obtenerUsuarios() {
+    return http.get("/users");
   }
 
-
+  actualizarUsuarios(id, data) {
+    return http.put(`/users/${id}`, data);
+  }
 
 }
 

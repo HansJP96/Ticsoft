@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import {
     Route,
     Switch,
-    useLocation,
 } from "react-router-dom";
 
 import PageNotFound from '../PageNotFound'

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import TecsoftDataService from "../services/tecsoft.service";
+import TecsoftDataService from "../../services/tecsoft.service";
 
-import './Css.css';
+import '../cssStyles/general/Css.css'
 
 import Table from 'react-bootstrap/Table';
 import Container from 'react-bootstrap/esm/Container';
@@ -11,38 +11,39 @@ import Form from "react-bootstrap/Form";
 import Button from 'react-bootstrap/Button';
 import Toast from 'react-bootstrap/Toast';
 
-export default class MasterAdmin extends Component {
+export default class ActualizarProducto extends Component {
     constructor(props) {
         super(props);
-        this.retrieveUsuarios = this.retrieveUsuarios.bind(this);
+        this.retrieveProductos = this.retrieveProductos.bind(this);
         this.refreshList = this.refreshList.bind(this);
-        this.setActiveUsuarios = this.setActiveUsuarios.bind(this);
-        this.updateUsuario = this.updateUsuario.bind(this);
-        this.onChangeFirstName = this.onChangeFirstName.bind(this);
-        this.onChangeEmail = this.onChangeEmail.bind(this);
-        this.onChangeRol = this.onChangeRol.bind(this);
+        this.setActiveProductos = this.setActiveProductos.bind(this);
+        this.updateProductos = this.updateProductos.bind(this);
+        this.onChangeNombre = this.onChangeNombre.bind(this);
+        this.onChangeDescripcion = this.onChangeDescripcion.bind(this);
+        this.onChangeValor = this.onChangeValor.bind(this);
+        this.onChangeCantidad = this.onChangeCantidad.bind(this);
 
 
         this.state = {
-            usuarios: [],
-            currentUsuario: null,
+            productos: [],
+            currentProducto: null,
             currentIndex: -1,
-            FirstName: "",
+            nombre: "",
 
             updated: false
         };
     }
 
     componentDidMount() {
-        this.retrieveUsuarios();
+        this.retrieveProductos();
     }
 
-    retrieveUsuarios() {
-        TecsoftDataService.obtenerUsuarios()
+    retrieveProductos() {
+        TecsoftDataService.getAll()
             .then(response => {
                 this.setState({
-                    usuarios: response.data,
-                    updated: false
+                    productos: response.data,
+                    updated:false
                 });
                 console.log(response.data);
             })
@@ -52,22 +53,22 @@ export default class MasterAdmin extends Component {
     }
 
     refreshList() {
-        this.retrieveUsuarios();
+        this.retrieveProducto();
         this.setState({
-            currentUsuario: null,
+            currentProducto: null,
             currentIndex: -1
         });
     }
 
-    updateUsuario() {
-        TecsoftDataService.actualizarUsuarios(
-            this.state.currentUsuario.id,
-            this.state.currentUsuario
+    updateProductos() {
+        TecsoftDataService.update(
+            this.state.currentProducto.id,
+            this.state.currentProducto
         )
             .then(response => {
                 console.log(response.data);
                 this.setState({
-                    message: "Usuario updated successfully!",
+                    message: "Producto updated successfully!",
                     updated: true
                 });
             })
@@ -76,45 +77,57 @@ export default class MasterAdmin extends Component {
             });
     }
 
-    onChangeFirstName(e) {
-        const FirstName = e.target.value;
+    onChangeNombre(e) {
+        const nombre = e.target.value;
         this.setState(function (prevState) {
             return {
-                currentUsuario: {
-                    ...prevState.currentUsuario,
-                    FirstName: FirstName
+                currentProducto: {
+                    ...prevState.currentProducto,
+                    nombre: nombre
                 }
             };
         });
     }
 
-    onChangeRol(e) {
-        const Rol = e.target.value;
+    onChangeDescripcion(e) {
+        const descripcion = e.target.value;
         this.setState(function (prevState) {
             return {
-                currentUsuario: {
-                    ...prevState.currentUsuario,
-                    Rol: Rol
+                currentProducto: {
+                    ...prevState.currentProducto,
+                    descripcion: descripcion
                 }
             };
         });
     }
 
-    onChangeEmail(e) {
-        const Email = e.target.value;
+    onChangeValor(e) {
+        const valor = e.target.value;
         this.setState(function (prevState) {
             return {
-                currentUsuario: {
-                    ...prevState.currentUsuario,
-                    Email: Email
+                currentProducto: {
+                    ...prevState.currentProducto,
+                    valor: valor
                 }
             };
         });
     }
 
-    setActiveUsuarios(usuario, index) {
+    onChangeCantidad(e) {
+        const cantidad = e.target.value;
+        this.setState(function (prevState) {
+            return {
+                currentProducto: {
+                    ...prevState.currentProducto,
+                    cantidad: cantidad
+                }
+            };
+        });
+    }
+
+    setActiveProductos(producto, index) {
         this.setState({
-            currentUsuario: usuario,
+            currentProducto: producto,
             currentIndex: index
         });
     }
@@ -122,7 +135,7 @@ export default class MasterAdmin extends Component {
 
     render() {
 
-        const { usuarios, currentUsuario, currentIndex } = this.state;
+        const { productos, currentProducto, currentIndex } = this.state;
 
         return (
 
@@ -131,44 +144,44 @@ export default class MasterAdmin extends Component {
 
                     {this.state.updated ? (
                         <div className="toastSucess">
-                            <Toast onClose={this.retrieveUsuarios} className="toastS">
+                            <Toast onClose={this.retrieveProductos} className="toastS">
                                 <Toast.Header>
                                     <strong className="me-auto">Correcto</strong>
                                     <small>Ahora</small>
                                 </Toast.Header>
-                                <Toast.Body>Usuario Actualizado Correctamente</Toast.Body>
+                                <Toast.Body>Producto Actualizado Correctamente</Toast.Body>
                             </Toast>
                         </div>
                     ) : (
 
-                        <div className="Usuarios">
+                        <div className="Productos">
                             <Row>
-                                {currentUsuario ? (
+                                {currentProducto ? (
                                     <div>
                                         <Form>
                                             <Row>
                                                 <Col>
                                                     <Form.Group className="mb-3" controlId="formGroupID">
-                                                        <Form.Label>Id Usuario</Form.Label>
+                                                        <Form.Label>Id Producto</Form.Label>
                                                         <Form.Control type="text"
-                                                            placeholder={currentUsuario.id} disabled />
+                                                            placeholder={currentProducto.id} disabled />
                                                     </Form.Group>
                                                 </Col>
                                                 <Col>
                                                     <Form.Group className="mb-3" controlId="formGroupNombre">
-                                                        <Form.Label>Nombre Usuario</Form.Label>
+                                                        <Form.Label>Nombre Producto</Form.Label>
                                                         <Form.Control type="text"
-                                                            value={currentUsuario.FirstName}
-                                                            onChange={this.onChangeNombre} disabled />
+                                                            value={currentProducto.nombre}
+                                                            onChange={this.onChangeNombre} />
                                                     </Form.Group>
                                                 </Col>
                                                 <Col>
-                                                    <Form.Group className="mb-3" controlId="formGroupApellido">
-                                                        <Form.Label>Apellido Usuario</Form.Label>
-                                                        <Form.Control type="text"
-                                                            value={currentUsuario.LastName}
-                                                            onChange={this.onChangeLastName} disabled
-                                                        />
+                                                    <Form.Group className="mb-3" controlId="formGroupDescripcion">
+                                                        <Form.Label>Descripcion Producto</Form.Label>
+                                                        <Form.Control type="text" 
+                                                            value={currentProducto.descripcion}
+                                                            onChange={this.onChangeDescripcion}
+                                                            />
                                                     </Form.Group>
                                                 </Col>
                                             </Row>
@@ -176,26 +189,19 @@ export default class MasterAdmin extends Component {
                                         <Form>
                                             <Row>
                                                 <Col>
-                                                    <Form.Label > Seleccion Rol</Form.Label>
-                                                    <Form.Select aria-label="Default example" onChange={this.onChangeRol} >
-                                                        <option>Unauthorized</option>
-                                                        <option value="Vendedor">Vendedor</option>
-                                                        <option value="Administrador">Administrador</option>
-                                                    </Form.Select>
-                                                </Col>
-                                                <Col>
-                                                    <Form.Group className="mb-3" controlId="formGroupRol">
-                                                        <Form.Label>Rol</Form.Label>
+                                                    <Form.Group className="mb-3" controlId="formGroupValor">
+                                                        <Form.Label>Valor Unitario</Form.Label>
                                                         <Form.Control type="text"
-                                                            value={currentUsuario.Rol} disabled/>
+                                                            value={currentProducto.valor}
+                                                            onChange={this.onChangeValor} />
                                                     </Form.Group>
                                                 </Col>
                                                 <Col>
-                                                    <Form.Group className="mb-3" controlId="formGroupEmail">
-                                                        <Form.Label>Email</Form.Label>
-                                                        <Form.Control type="text"
-                                                            value={currentUsuario.Email}
-                                                            onChange={this.onChangeEmail} />
+                                                    <Form.Group className="mb-3" controlId="formGroupCantidad">
+                                                        <Form.Label>Cantidad</Form.Label>
+                                                        <Form.Control type="text" 
+                                                            value={currentProducto.cantidad}
+                                                            onChange={this.onChangeCantidad}/>
                                                     </Form.Group>
                                                 </Col>
                                             </Row>
@@ -205,10 +211,10 @@ export default class MasterAdmin extends Component {
                                             <Row>
                                                 <Col>
                                                     <Button variant="outline-dark"
-                                                        to={"/actualizarUsuarios/" + currentUsuario.id}
-                                                        onClick={this.updateUsuario}
+                                                        to={"/actualizarproducto/" + currentProducto.id}
+                                                        onClick={this.updateProductos}
                                                         size="lg">
-                                                        Actualizar Usuario
+                                                        Actualizar Producto
                                                     </Button>
                                                 </Col>
                                             </Row>
@@ -217,7 +223,7 @@ export default class MasterAdmin extends Component {
                                 ) : (
                                     <div>
                                         <br />
-                                        <p>Selecciona un Usuario</p>
+                                        <p>Selecciona un Producto</p>
                                     </div>
                                 )}
 
@@ -227,32 +233,33 @@ export default class MasterAdmin extends Component {
 
                     )}
 
+
                     <Row>
                         <ul className="list-group">
-                            {usuarios && usuarios.map((usuario, index) => (
+                            {productos && productos.map((producto, index) => (
 
                                 <li
                                     className={"list-group-item " + (index === currentIndex ? "active" : "")}
-                                    onClick={() => this.setActiveUsuarios(usuario, index)}
+                                    onClick={() => this.setActiveProductos(producto, index)}
                                     key={index}
                                 >
                                     <Table striped bordered hover variant="dark">
                                         <thead>
                                             <tr>
-                                                <th>Id Usuario</th>
+                                                <th>Id Producto</th>
                                                 <th>Nombre</th>
-                                                <th>Apellido</th>
-                                                <th>Email</th>
-                                                <th>Rol</th>
+                                                <th>Valor</th>
+                                                <th>Descripcion</th>
+                                                <th>Cantidad</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>{usuario.id}</td>
-                                                <td>{usuario.FirstName}</td>
-                                                <td>{usuario.LastName}</td>
-                                                <td>{usuario.Email}</td>
-                                                <td>{usuario.Rol}</td>
+                                                <td>{producto.id}</td>
+                                                <td>{producto.nombre}</td>
+                                                <td>{producto.valor}</td>
+                                                <td>{producto.descripcion}</td>
+                                                <td>{producto.cantidad}</td>
                                             </tr>
                                         </tbody>
                                     </Table>

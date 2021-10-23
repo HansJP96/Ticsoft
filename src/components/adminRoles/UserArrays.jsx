@@ -11,15 +11,19 @@ export const roles = () => {
     const AdminTools = [
         ["Home", [["", "Home", LoginAdmin]]],
         ["Productos", [["RegistrarProducto", "Registrar Producto",RegistrarProducto], ["ActualizarProducto", "Actualizar Producto",ActualizarProducto]]],
-        ["Ventas", [["RegistrarVentas", "Registrar Ventas", RegistrarVenta], ["ActualizarVentas", "Actualizar Ventas", ActualizarVenta]]]
+        ["Ventas", [["RegistrarVenta", "Registrar Ventas", RegistrarVenta], ["ActualizarVenta", "Actualizar Ventas", ActualizarVenta]]]
     ]
     
     const VendorTools = [
         ["Home", [["", "Home", LoginVendor]]],
-        ["Ventas", [["RegistrarVentas", "Registrar Ventas", RegistrarVenta], ["ActualizarVentas", "Actualizar Ventas", ActualizarVenta]]]
+        ["Ventas", [["RegistrarVenta", "Registrar Ventas", RegistrarVenta], ["ActualizarVenta", "Actualizar Ventas", ActualizarVenta]]]
     ]
 
-    return [["Administrador", AdminTools], ["Vendedor", VendorTools]]
+    const Master = [
+        ["Home", [["", "Control de Usuarios", MasterAdmin]]]
+    ]
+
+    return [["Administrador", AdminTools], ["Vendedor", VendorTools],["Master", Master]]
 }
 
 

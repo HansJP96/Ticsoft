@@ -54,7 +54,7 @@ const NavbarMenu = (props) => {
         const [actualRol] = Roles.filter(selectedRol => selectedRol[0] === rol)
 
         items =
-            actualRol[1].map((element, index) => {
+            actualRol[1].map((element, index1) => {
                 subItems =
                     element[1].map((option, index) => {
                         (option[0] === pathPos) && (menu = option[1])
@@ -66,10 +66,10 @@ const NavbarMenu = (props) => {
                     }
                     )
                 return (
-                    <>
+                    <div key={index1} >
                         {subItems}
-                        {index < actualRol[1].length - 1 && <NavDropdown.Divider key={index} />}
-                    </>
+                        {index1 < actualRol[1].length - 1 && <NavDropdown.Divider/>}
+                    </div>
                 )
             }
             )

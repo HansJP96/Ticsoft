@@ -17,11 +17,11 @@ import NavbarMenu from './components/MainMenu';
 const cookie = new Cookies();
 
 const App = () => {
-  
+
   const sessionState = sessionStorage.getItem('isSignedIn')
   //const location = useLocation()
 
-  const [userSigned, setUserSigned] = useState(sessionState? (cookie.get('userData')):(null))
+  const [userSigned, setUserSigned] = useState(sessionState ? (cookie.get('userData')) : (null))
   //const [SignedIn, setSignedIn] = useState(sessionState)
 
   const assign = (data) => {
@@ -38,14 +38,14 @@ const App = () => {
     if (!sessionState) {
       cookie.remove('userData')
     }
-  },[sessionState])
+  }, [sessionState])
 
   return (
     <>
       <Router>
         <NavbarMenu user={userSigned} clear={clearData} ></NavbarMenu>
         <Switch>
-          <Route exact path="/" render={() => <LoginPage userInfo={assign}/>} />
+          <Route exact path="/" render={() => <LoginPage userInfo={assign} />} />
           {!userSigned ? (
             <Route path="*" component={DeniedPage} />
           ) : (
