@@ -104,10 +104,10 @@ const LoginPage = (props) => {
                 })
         };
 
-        const SigninFailure = (responseGoogle) => {
+        /*const SigninFailure = (responseGoogle) => {
             //setIsLoggedIn(false) adaptar esto de alguna forma
             window.alert("error algo")
-        }
+        }*/
 
         return (
             <>
