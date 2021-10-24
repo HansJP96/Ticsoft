@@ -170,16 +170,17 @@ const LoginPage = (props) => {
     const handleClose = () => setShowModal(false);
     const handleShow = () => setShowModal(true);
 
-    useEffect(() => {
+    /*useEffect(() => {
         /*if (signed === false){
             cookie.remove('userData')
-        }*/
+        }
         if (sessionStorage.getItem('isSignedIn')) {
             setValue(signed)
         } else {
             setValue(false)
         }
-    })
+    })*/
+    
 
     return (
         <>
