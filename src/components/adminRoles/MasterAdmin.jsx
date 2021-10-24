@@ -44,10 +44,10 @@ export default class MasterAdmin extends Component {
                     usuarios: response.data,
                     updated: false
                 });
-                console.log(response.data);
+                //console.log(response.data);
             })
             .catch(e => {
-                console.log(e);
+                //console.log(e);
             });
     }
 
@@ -65,14 +65,14 @@ export default class MasterAdmin extends Component {
             this.state.currentUsuario
         )
             .then(response => {
-                console.log(response.data);
+                //console.log(response.data);
                 this.setState({
                     message: "Usuario updated successfully!",
                     updated: true
                 });
             })
             .catch(e => {
-                console.log(e);
+                //console.log(e);
             });
     }
 

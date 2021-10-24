@@ -166,7 +166,7 @@ export default class ActualizarVenta extends Component {
 
         const { ventas, currentVenta, currentPosicion } = this.state;
         return (
-            <Container>
+            <Container  style={{marginTop:"8%"}} >
 
 
                 {this.state.updated ? (

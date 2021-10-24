@@ -97,7 +97,7 @@ export default class RegistrarProducto extends Component {
 
     render() {
         return (
-            <div className="form">
+            <div className="form" style={{marginTop:"8%", width:"70%", marginLeft:"15%"}}>
                 {this.state.submitted ? (
                     <div className="toastSucess">
                         <Toast onClose={this.newProducto} className="toastS">

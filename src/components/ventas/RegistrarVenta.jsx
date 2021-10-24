@@ -70,12 +70,12 @@ export default class RegistrarVenta extends Component {
 
     onChangeUsuariosId(e) {
         var change2 = JSON.parse(e.target.value)
-        console.log(change2.usuario.Id)
+        //console.log(change2.usuario.Id)
         this.setState({
             usuarioId: change2.usuario.Id
         });
         this.setActiveUsuarios(change2.usuario, change2.posicion)
-        console.log(this.state)
+        //console.log(this.state)
     }
 
     componentDidMount() {
@@ -90,16 +90,16 @@ export default class RegistrarVenta extends Component {
                     productos: response.data,
                     submitted: false
                 });
-                console.log(response.data);
+                //console.log(response.data);
             })
             .catch(e => {
-                console.log(e);
+                //console.log(e);
             });
     }
 
     setActiveProductos(producto, index) {
 
-        console.log(index)
+        //console.log(index)
         this.setState({
             currentProducto: producto,
             currentIndex: index
@@ -113,10 +113,10 @@ export default class RegistrarVenta extends Component {
                     usuarios: response.data,
                     submitted: false
                 });
-                console.log(response.data);
+                //console.log(response.data);
             })
             .catch(e => {
-                console.log(e);
+                //console.log(e);
             });
     }
 
@@ -137,7 +137,7 @@ export default class RegistrarVenta extends Component {
 
 
         }; 
-        console.log(this.state.usuarioId)
+        //console.log(this.state.usuarioId)
         TecsoftDataService.crear(data)
             .then(response => {
                 this.setState({
@@ -150,10 +150,10 @@ export default class RegistrarVenta extends Component {
 
                     submitted: true
                 });
-                console.log(response.data);
+                //console.log(response.data);
             })
             .catch(e => {
-                console.log(e);
+                //console.log(e);
             });
     }
 
@@ -176,7 +176,7 @@ export default class RegistrarVenta extends Component {
         const { productos, currentProducto, currentIndex, usuarios, currentUsuario, currentPosicion } = this.state;
 
         return (
-            <div className="form">
+            <div className="form" style={{marginTop:"8%"}}>
                 {this.state.submitted ? (
                     <div className="toastSucess">
                         <Toast onClose={this.newVenta} className="toastS">

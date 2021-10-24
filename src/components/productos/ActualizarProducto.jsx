@@ -140,7 +140,7 @@ export default class ActualizarProducto extends Component {
         return (
 
             <div className="listItems">
-                <Container>
+                <Container style={{marginTop:"8%"}} >
 
                     {this.state.updated ? (
                         <div className="toastSucess">

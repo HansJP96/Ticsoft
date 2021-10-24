@@ -32,7 +32,7 @@ const App = () => {
     setUserSigned()
   }
 
-  console.log(sessionState)
+  //console.log(sessionState)
 
   useEffect(() => {
     if (!sessionState) {

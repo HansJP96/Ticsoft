@@ -78,7 +78,7 @@ const NavbarMenu = (props) => {
     return (
         <>
             {(userData && location.pathname !== "/") && (
-                <Navbar bg="dark" variant="dark">
+                <Navbar bg="dark" variant="dark" className="navbar fixed-top">
                     <Container style={{ display: "flex", flexDirection: "row", minWidth: "100%", maxHeight: "60px" }} >
                         <Navbar.Brand>{rol}</Navbar.Brand>
                         <Nav>

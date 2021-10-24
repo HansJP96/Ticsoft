@@ -11,6 +11,8 @@ import RegisterModal from './RegisterModal'
 
 const cookie = new Cookies();
 
+const urlBack= "https://pruebabackticsoft.herokuapp.com/api"
+
 const useSessionStorage = key => {
     const initialValue = sessionStorage.getItem(key)
     const [persistedValue, setPersistedValue] = useState(
@@ -55,10 +57,10 @@ const LoginPage = (props) => {
             let resStatus = 200
             let email = responseGoogle.profileObj.email
             //console.log(responseGoogle.isSignedIn())
-            fetch(`http://localhost:8080/api/users/${email}`, { method: "get" })
+            fetch(`${urlBack}/users/${email}`, { method: "get" })
                 .then(res => {
                     resStatus = res.status
-                    console.log(resStatus)
+                    //console.log(resStatus)
                     //throw Error('Currently the server is down, please contact with your provider.')
                     return res.json()
                 })
@@ -112,7 +114,6 @@ const LoginPage = (props) => {
                 <GoogleLogin className="google"
                     clientId="665251628146-6lukt5lfm6afau043mjmicurun28cnmv.apps.googleusercontent.com"
                     onSuccess={SigninWithGoogle}
-                    onFailure={SigninFailure}
                     isSignedIn={signed}
                     theme="dark"
                     cookiePolicy={"single_host_origin"}
@@ -124,7 +125,7 @@ const LoginPage = (props) => {
     const registerUser = () => {
         let resStatus = 200
 
-        fetch(`http://localhost:8080/api/users`,
+        fetch(`${urlBack}/users`,
             {
                 method: "post",
                 headers: {
