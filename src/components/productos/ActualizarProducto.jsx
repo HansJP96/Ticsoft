@@ -38,8 +38,8 @@ export default class ActualizarProducto extends Component {
         this.retrieveProductos();
     }
 
-    retrieveProductos() {
-        TecsoftDataService.getAll()
+    async retrieveProductos() {
+        await TecsoftDataService.getAll()
             .then(response => {
                 this.setState({
                     productos: response.data,
@@ -60,8 +60,8 @@ export default class ActualizarProducto extends Component {
         });
     }
 
-    updateProductos() {
-        TecsoftDataService.update(
+     async updateProductos() {
+        await TecsoftDataService.update(
             this.state.currentProducto.id,
             this.state.currentProducto
         )

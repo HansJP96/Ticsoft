@@ -55,7 +55,7 @@ export default class RegistrarProducto extends Component {
         });
     }
 
-    saveProducto() {
+    async saveProducto() {
         var data = {
             nombre: this.state.nombre,
             descripcion: this.state.descripcion,
@@ -63,7 +63,7 @@ export default class RegistrarProducto extends Component {
             valor: this.state.valor
         };
 
-        TecsoftDataService.create(data)
+        await TecsoftDataService.create(data)
             .then(response => {
                 this.setState({
                     id: response.data.id,

@@ -11,7 +11,7 @@ import RegisterModal from './RegisterModal'
 
 const cookie = new Cookies();
 
-const urlBack= "https://pruebabackticsoft.herokuapp.com/api"
+const urlBack = "https://pruebabackticsoft.herokuapp.com/api"
 
 const useSessionStorage = key => {
     const initialValue = sessionStorage.getItem(key)
@@ -53,11 +53,11 @@ const LoginPage = (props) => {
 
         let history = useHistory()
 
-        const SigninWithGoogle = (responseGoogle) => {
+        const SigninWithGoogle = async (responseGoogle) => {
             let resStatus = 200
             let email = responseGoogle.profileObj.email
             //console.log(responseGoogle.isSignedIn())
-            fetch(`${urlBack}/users/${email}`, { method: "get" })
+            await fetch(`${urlBack}/users/${email}`, { method: "get" })
                 .then(res => {
                     resStatus = res.status
                     //console.log(resStatus)
@@ -122,10 +122,10 @@ const LoginPage = (props) => {
         )
     }
 
-    const registerUser = () => {
+    const registerUser = async () => {
         let resStatus = 200
 
-        fetch(`${urlBack}/users`,
+        await fetch(`${urlBack}/users`,
             {
                 method: "post",
                 headers: {

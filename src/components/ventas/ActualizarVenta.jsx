@@ -41,8 +41,8 @@ export default class ActualizarVenta extends Component {
         this.retrieveVentas();
     }
 
-    retrieveVentas() {
-        TecsoftDataService.obtenerVentas()
+    async retrieveVentas() {
+        await TecsoftDataService.obtenerVentas()
             .then(response => {
                 this.setState({
                     ventas: response.data,
@@ -63,8 +63,8 @@ export default class ActualizarVenta extends Component {
         });
     }
 
-    updateVentas() {
-        TecsoftDataService.actualizar(
+    async updateVentas() {
+        await TecsoftDataService.actualizar(
             this.state.currentVenta.id,
             this.state.currentVenta
         )
