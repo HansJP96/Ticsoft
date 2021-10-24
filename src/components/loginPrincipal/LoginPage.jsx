@@ -53,10 +53,17 @@ const LoginPage = (props) => {
 
         let history = useHistory()
 
-        const SigninWithGoogle = async (responseGoogle) => {
+        const SigninWithGoogle =  (responseGoogle) => {
             let resStatus = 200
             let email = responseGoogle.profileObj.email
+            let datos = responseGoogle
+            console.log(email)
+            cargar(email, datos, resStatus)
             //console.log(responseGoogle.isSignedIn())
+        }
+
+        const cargar = async (email,responseGoogle)=>{
+            let resStatus = 200
             await fetch(`${urlBack}/users/${email}`, { method: "get" })
                 .then(res => {
                     resStatus = res.status
@@ -102,8 +109,7 @@ const LoginPage = (props) => {
                     setSigned(false)
                     handleShow()
                 })
-        };
-
+        }
         /*const SigninFailure = (responseGoogle) => {
             //setIsLoggedIn(false) adaptar esto de alguna forma
             window.alert("error algo")
