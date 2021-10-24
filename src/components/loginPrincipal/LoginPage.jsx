@@ -86,7 +86,7 @@ const LoginPage = (props) => {
                         cookie.set('userData', user)
                         sessionStorage.setItem('isSignedIn', signed)
                         props.userInfo(user)
-                        history.push(`${user.uRol}/`)
+                        history.push(`/${user.uRol}/`)
                     }
                 })
                 .catch((err) => {
