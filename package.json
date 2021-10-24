@@ -10,9 +10,6 @@
     "keywords": [
         "cors"
     ],
-    "engines": {
-        "node": "14.x"
-    },
     "author": "Andrew",
     "license": "ISC",
     "dependencies": {
