@@ -58,7 +58,7 @@ const LoginPage = (props) => {
             let email = responseGoogle.profileObj.email
             let datos = responseGoogle
             console.log(email)
-            cargar(email, datos, resStatus)
+            cargar(email, datos)
             //console.log(responseGoogle.isSignedIn())
         }
 
@@ -93,7 +93,7 @@ const LoginPage = (props) => {
                         cookie.set('userData', user)
                         sessionStorage.setItem('isSignedIn', signed)
                         props.userInfo(user)
-                        history.push(`https://pruebafrontticsoft.herokuapp.com/${user.uRol}/`)
+                        history.push(`${user.uRol}/`)
                     }
                 })
                 .catch((err) => {
@@ -110,16 +110,17 @@ const LoginPage = (props) => {
                     handleShow()
                 })
         }
-        /*const SigninFailure = (responseGoogle) => {
+        const SigninFailure = (responseGoogle) => {
             //setIsLoggedIn(false) adaptar esto de alguna forma
-            window.alert("error algo")
-        }*/
+            window.alert("error:" + responseGoogle)
+        }
 
         return (
             <>
                 <GoogleLogin className="google"
                     clientId="665251628146-6lukt5lfm6afau043mjmicurun28cnmv.apps.googleusercontent.com"
                     onSuccess={SigninWithGoogle}
+                    onFailure={SigninFailure}
                     isSignedIn={signed}
                     theme="dark"
                     cookiePolicy={"single_host_origin"}
@@ -163,7 +164,7 @@ const LoginPage = (props) => {
             .catch((err) => {
                 if (400 < resStatus < 600) {
                     //window.alert("Error : " + err.message)
-                    setMessageText(`Error ${resStatus}:` + err.message)
+                    setMessageText(`Error2 ${resStatus}:` + err.message)
                     handleShow()
                 } else {
                     setMessageText(err.message)
