@@ -42,7 +42,7 @@ const App = () => {
 
   return (
     <>
-      <Router basename="/" >
+      <Router>
         <NavbarMenu user={userSigned} clear={clearData} ></NavbarMenu>
         <Switch>
           <Route exact path="/" render={() => <LoginPage userInfo={assign} />} />
