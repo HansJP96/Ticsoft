@@ -1,8 +1,8 @@
 module.exports = {
-    HOST: "localhost",
-    USER: "root",
-    PASSWORD: "hansee",
-    DB: "ticsoft",
+    HOST: "sql10.freesqldatabase.com",
+    USER: "sql10446391",
+    PASSWORD: "mUYrEDr2zs",
+    DB: "sql10446391",
     dialect: "mysql",
     timezone: "-05:00",
     pool: {
